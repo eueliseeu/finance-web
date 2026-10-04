@@ -1,0 +1,98 @@
+@inject IKeyboardShortcutService KeyboardShortcuts
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
+
+@* Spotlight Command Palette - Global search and command interface *@
+<Dialog @bind-Open="_isOpen">
+    <DialogContent 
+        ShowClose="true" UseCustomAnimations="true"
+        Class="!inset-0 !w-screen !h-screen !max-w-none !translate-x-0 !translate-y-0 sm:!inset-auto sm:!w-full sm:!h-auto sm:!max-w-lg sm:!left-[50%] sm:!translate-x-[-50%] sm:!top-[20vh] sm:!translate-y-0 border-border/40 p-0 !rounded-none sm:!rounded-2xl shadow-xl gap-0 overflow-hidden duration-500 dialog-panel dialog-animated"
+        OverlayClass="bg-background/70 backdrop-blur backdrop-saturate-150 dialog-overlay dialog-animated">
+        
+        <HeightAnimation Config="@_heightAnimationConfig" Enabled="@_isOpen">
+            <CommandContent OnValueChange="@HandleSelect">
+                <CommandInput 
+                    Placeholder="Type a command or search..." SearchInterval="300" AutoFocus="true"
+                    Class="border-0 border-b border-border/40 rounded-none focus-visible:ring-0" />
+                
+                <CommandList Class="max-h-[calc(100vh-4rem)] md:max-h-[350px] scrollbar-thin">
+                    <CommandEmpty>
+                        <div class="flex flex-col items-center gap-2 py-6 text-muted-foreground">
+                            <LucideIcon Name="search-x" Size="32" />
+                            <p class="text-sm">No results found.</p>
+                        </div>
+                    </CommandEmpty>
+                    
+                    <CommandGroup Heading="Navigation">
+                        <CommandItem Value="">
+                            <LucideIcon Name="house" Size="16" Class="mr-2" />
+                            <span>Home</span>
+                        </CommandItem>
+                        <CommandItem Value="counter">
+                            <LucideIcon Name="component" Size="16" Class="mr-2" />
+                            <span>Counter</span>
+                        </CommandItem>
+                        <CommandItem Value="weather">
+                            <LucideIcon Name="cloud-rain" Size="16" Class="mr-2" />
+                            <span>Weather</span>
+                        </CommandItem>
+                    </CommandGroup>
+
+                </CommandList>
+            </CommandContent>
+        </HeightAnimation>
+    </DialogContent>
+</Dialog>
+
+@code {
+    private bool _isOpen = false;
+    private readonly HeightAnimationConfig _heightAnimationConfig = new()
+    {
+        ContentSelector = "[role=\"listbox\"]",
+        InputSelector = "[data-command-input-wrapper]",
+        IncludeInputHeight = true
+    };
+
+    public void Open()
+    {
+        _isOpen = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        _isOpen = false;
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await KeyboardShortcuts.RegisterAsync("Ctrl+K", async () =>
+            {
+                _isOpen = !_isOpen;
+                await InvokeAsync(StateHasChanged);
+            });
+        }
+    }
+
+    private void HandleSelect(string value)
+    {
+        _isOpen = false;
+        NavigationManager.NavigateTo(value);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (KeyboardShortcuts != null)
+        {
+            try
+            {
+                KeyboardShortcuts.Unregister("Ctrl+K");
+            }
+            catch (ObjectDisposedException) { }
+            catch (InvalidOperationException) { }
+        }
+    }
+}

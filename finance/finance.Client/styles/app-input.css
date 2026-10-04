@@ -1,0 +1,32 @@
+/* Import Tailwind CSS */
+@import 'tailwindcss';
+
+/* Import Tailwind v4 configuration (must come after @import 'tailwindcss') */
+@config "../tailwind.config.js";
+
+/* Scan source paths */
+@source "../**/*.{razor,html,cs}";
+@source "../../finance/**/*.{razor,html,cs}";
+
+/* Import new OKLCH single-theme file */
+@import './theme.css';
+
+/* Component structural variables (not part of replaceable theme) */
+@layer base {
+    :root {
+        --sidebar-width: 16rem;
+        --sidebar-width-mobile: 18rem;
+        --sidebar-width-icon: 3rem;
+        --dialog-panel-duration: 1.25s;
+        --dialog-panel-easing: var(--ease-modal);
+    }
+}
+
+/* Custom styles for keyboard navigation focus */
+/* HEADLESS DESIGN: Use data attributes instead of CSS classes */
+@layer components {
+    [role="option"][data-focused="true"] {
+        background-color: var(--accent);
+        color: var(--accent-foreground);
+    }
+}

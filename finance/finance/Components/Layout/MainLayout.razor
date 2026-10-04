@@ -1,0 +1,12 @@
+@inherits LayoutComponentBase
+
+<AppProvider>
+    <div class="min-h-screen bg-background text-foreground">
+        @Body
+    </div>
+
+    <ToastViewport />
+    <DialogHost />
+    <ContainerPortalHost />
+    <OverlayPortalHost />
+</AppProvider>

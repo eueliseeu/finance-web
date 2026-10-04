@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="styles\theme.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.8" />
+    <PackageReference Include="NeoUI.Blazor" Version="4.1.33" />
+    <PackageReference Include="NeoUI.Blazor.Primitives" Version="4.0.10" />
+    <PackageReference Include="NeoUI.Icons.Lucide" Version="3.0.0" />
+  </ItemGroup>
+
+  <!-- Build Tailwind CSS -->
+  <Target Name="NpmInstall" BeforeTargets="BuildTailwindCSS"
+          Condition="!Exists('$(MSBuildProjectDirectory)\node_modules')">
+    <Message Importance="high" Text="node_modules not found; running npm install..." />
+    <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="BuildTailwindCSS" BeforeTargets="BeforeBuild">
+    <Exec Command="npm run build:css" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+</Project>
