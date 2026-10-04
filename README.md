@@ -1,6 +1,6 @@
 # Sistema de Controle Financeiro
 
-Este é o meu primeiro projeto front-end, desenvolvido como um sistema de controle financeiro pessoal. O objetivo principal da aplicação é permitir o gerenciamento de receitas, despesas e saldo atual de forma simples e intuitiva.
+Este é o meu primeiro projeto front-end, desenvolvido como um sistema de controle financeiro pessoal.
 
 ## Tecnologias Utilizadas
 
@@ -11,16 +11,6 @@ Este é o meu primeiro projeto front-end, desenvolvido como um sistema de contro
 ## Funcionalidades
 
 * Interface moderna e responsiva utilizando componentes do NeoUI.
-
-## Como Executar
-
-1. Certifique-se de ter o .NET SDK instalado em sua máquina.
-2. Clone este repositório.
-3. Abra o terminal na pasta do projeto e execute o comando:
-   ```bash
-   dotnet run
-   ```
-4. Acesse o endereço local fornecido no terminal para visualizar a aplicação.
 
 ## Aprendizados
 
