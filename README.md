@@ -1,17 +1,17 @@
-# Sistema de Controle Financeiro
+# Financial Control System
 
-Este é o meu primeiro projeto front-end, desenvolvido como um sistema de controle financeiro pessoal.
+This is my first front-end project, developed as a personal financial control system.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-* **Blazor:** Framework para desenvolvimento web em .NET utilizando C#.
-* **NeoUI:** Biblioteca de componentes para a interface do usuário.
-* **HTML5 e TailwindCss:** Estruturação e estilização base.
+- **Blazor:** Framework for building web applications in .NET using C#.
+- **NeoUI:** Component library for the user interface.
+- **HTML5 & Tailwind CSS:** Structure and base styling.
 
-## Funcionalidades
+## Features
 
-* Interface moderna e responsiva utilizando componentes do NeoUI.
+- Modern and responsive interface using NeoUI components.
 
-## Aprendizados
+## Learnings
 
-Este projeto foi fundamental para compreender os conceitos básicos de componentes no Blazor, manipulação de estado e integração com bibliotecas de interface de usuário como o NeoUI.
+This project was essential for understanding the core concepts of Blazor components, state management, and integration with user interface libraries like NeoUI.
