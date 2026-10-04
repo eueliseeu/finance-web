@@ -6,12 +6,10 @@ Este é o meu primeiro projeto front-end, desenvolvido como um sistema de contro
 
 * **Blazor:** Framework para desenvolvimento web em .NET utilizando C#.
 * **NeoUI:** Biblioteca de componentes para a interface do usuário.
-* **HTML5 e CSS3:** Estruturação e estilização base.
+* **HTML5 e TailwindCss:** Estruturação e estilização base.
 
 ## Funcionalidades
 
-* Cadastro de transações (receitas e despesas).
-* Visualização do saldo total.
 * Interface moderna e responsiva utilizando componentes do NeoUI.
 
 ## Como Executar
